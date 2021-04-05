@@ -1,6 +1,4 @@
 export default function socket(app: any) {
-  console.log(app);
-
   const server = require("https").createServer(app);
   const io = require("socket.io")(server);
   let numUsers = 0;
@@ -34,25 +32,21 @@ export default function socket(app: any) {
       });
     });
 
-    // when the client emits 'typing', we broadcast it to others
     socket.on("typing", () => {
       socket.broadcast.emit("typing", {
         username: socket.username,
       });
     });
 
-    // when the client emits 'stop typing', we broadcast it to others
     socket.on("stopTyping", () => {
       socket.broadcast.emit("stop Typing", {
         username: socket.username,
       });
     });
 
-    // when the user disconnects.. perform this
     socket.on("disconnect", () => {
       if (addedUser) {
         --numUsers;
-
         // echo globally that this client has left
         socket.broadcast.emit("user left", {
           username: socket.username,

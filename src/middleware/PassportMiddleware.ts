@@ -1,4 +1,4 @@
-import { IUser } from "./../interfaces/IUser";
+import { IUser } from "../interfaces/IUser";
 import passport from "passport";
 
 var key = require("../config/key");
@@ -48,7 +48,7 @@ export default function () {
     })
   );
 
-  passport.use(
+  passport.use( 
     new GoogleStrategy(
       {
         consumerKey: key.GOOGLE.clientID,
@@ -57,9 +57,12 @@ export default function () {
       },
       function (token: any, tokenSecret: string, profile: any, done: any) {
         console.log(profile);
-        // User.findOrCreate({'google.id': profile.id}, function (err, user) {
-        //     return done(err, user);
-        // });
+        User.findOrCreate(
+          { "google.id": profile.id },
+          function (err: any, user: any) {
+            return done(err, user);
+          }
+        );
       }
     )
   );

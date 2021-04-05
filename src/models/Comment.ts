@@ -1,6 +1,4 @@
-import { Schema } from "mongoose";
-
-const mongoose = require("mongoose"); // Erase if already required
+import mongoose, { Schema } from "mongoose";
 
 // Declare the Schema of the Mongo model
 var commentSchema = new mongoose.Schema(
@@ -19,6 +17,10 @@ var commentSchema = new mongoose.Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    childrenComment: {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
     },
     image: {
       type: String,

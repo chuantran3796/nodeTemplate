@@ -11,6 +11,13 @@ export const userSchema = new mongoose.Schema(
       type: Date,
     },
     name: { type: String, required: true },
+    phone: {
+      type: Number,
+    },
+    bio: {
+      type: String,
+    },
+    
   },
   {
     timestamps: true,

@@ -1,6 +1,5 @@
-import mongoose from "mongoose"; // Erase if already required
+import mongoose from "mongoose"; 
 
-// Declare the Schema of the Mongo model
 var roleSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -8,21 +7,11 @@ var roleSchema = new mongoose.Schema({
     unique: true,
     index: true,
   },
-  email: {
-    type: String,
+  value: {
+    type: Number,
     required: true,
     unique: true,
-  },
-  mobile: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
   },
 });
 
-//Export the model
 module.exports = mongoose.model("Role", roleSchema);
