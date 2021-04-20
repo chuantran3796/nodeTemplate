@@ -13,6 +13,8 @@ import routerV2 from "./resources/v2/routers";
 
 import indexRouter from "./routers";
 import user from "./routers/user";
+import video from "./routers/video";
+
 import department from "./routers/department";
 import fileUpload from "express-fileupload";
 import apiversion from "./vendor/apiversion";
@@ -32,18 +34,20 @@ mongoose
 
 // Setup express
 const app = express();
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "pug");
 
 // logger morgan
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // Use cookie
+
 app.use(cookieParser());
 // setup folder contain assets
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
+
+//socket
 socket(app);
+
 // upload file
 app.use(
   fileUpload({
@@ -60,6 +64,8 @@ apiversion(app, {
 
 app.use("/", indexRouter);
 app.use("/", user);
+app.use("/", video);
+
 app.use("/department", department);
 
 // --END--      App routers
