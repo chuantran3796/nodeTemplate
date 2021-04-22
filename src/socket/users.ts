@@ -7,7 +7,7 @@ const users: any = {};
 async function randomID() {
   let id = haiku();
   while (id in users) {
-    await Promise.delay(5);
+    // await Promise.delay(5);
     id = haiku();
   }
   return id;

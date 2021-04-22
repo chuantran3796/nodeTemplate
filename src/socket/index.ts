@@ -1,13 +1,17 @@
 export default function socket(app: any) {
+  const users = require('./users');
+
   const server = require("https").createServer(app);
   const io = require("socket.io")(server);
   let broadcaster: any;
   let id: any;
 
   io.on("connection", (socket: any) => {
+    console.log(socket,"sss")
     socket
       .on("init", async () => {
         id = await users.create(socket);
+        console.log(id)
         socket.emit("init", { id });
       })
       .on("request", (data: any) => {

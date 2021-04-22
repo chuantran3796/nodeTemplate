@@ -19,6 +19,7 @@ import department from "./routers/department";
 import fileUpload from "express-fileupload";
 import apiversion from "./vendor/apiversion";
 import socket from "./socket";
+import notification from "./routers/notification";
 
 // const moduleURL = new URL(import.meta.url);
 // global.__dirname = path.dirname(moduleURL.pathname.substring(1));
@@ -43,7 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 // setup folder contain assets
-app.use(express.static(path.join(__dirname, "../public")));
+// app.use(express.static(path.join(__dirname, "../public")));
 
 //socket
 socket(app);
@@ -64,7 +65,7 @@ apiversion(app, {
 
 app.use("/", indexRouter);
 app.use("/", user);
-app.use("/", video);
+app.use("/", notification);
 
 app.use("/department", department);
 
