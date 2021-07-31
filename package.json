@@ -1,5 +1,5 @@
 {
-  "name": "zen_Sever",
+  "name": "",
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",
@@ -11,7 +11,7 @@
     "check-code": "prettier --check **/*.{ts,tsx,js,json,md}"
   },
   "keywords": [],
-  "author": "chuans",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.13.0",
@@ -68,6 +68,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.6.0",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "mongoose": "^5.12.2",
@@ -75,7 +76,7 @@
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
-    "socket.io": "^4.0.1",
+    "socket.io": "^4.1.2",
     "yarn": "^1.22.10"
   }
 }

@@ -2,13 +2,40 @@ import http from "http";
 import Debug from "debug";
 import app from "./app";
 import dotenv from "dotenv";
+// import { socket } from "./socket";
+
+const server = http.createServer(app);
 
 dotenv.config();
 const debug = Debug("MyApp");
 
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "8080";
 
-const server = http.createServer(app);
+var io = require("socket.io")(server, { pingTimeout: 30000 });
+// io.on("connection", socket);
+
+io.on("connection", (socket: any) => {
+  socket.on("disconnect", function () {});
+
+  socket.on("message", (message: any, id: number) => {
+    socket.to(id).emit("message", message);
+  });
+  socket.on("typing", (member: any, id: number) => {
+    socket.to(id).emit("typing", member);
+  });
+  socket.on("typingOff", (member: any, id: number) => {
+    socket.to(id).emit("typingOff", member);
+  });
+  socket.on("ping", () => {});
+  socket.on("connect", function () {
+    console.log("Client is Connected");
+  });
+
+  socket.on("pong", function (data: any) {
+    console.log("Received Pong: ", data);
+  });
+});
+
 server.listen(port);
 
 server.on("error", onError);
@@ -19,7 +46,6 @@ function onError(error: any) {
     throw error;
   }
   const bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case "EACCES":
       console.error(bind + " requires elevated privileges");

@@ -1,6 +1,9 @@
-import department from './department'
-
+import room from "./room";
+import notification from "./notification";
+import member from "./member";
 
 export default {
-    department
-}
+  room,
+  notification,
+  member,
+};

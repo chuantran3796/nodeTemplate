@@ -11,15 +11,10 @@ import createError from "http-errors";
 import routerV1 from "./resources/v1/routers";
 import routerV2 from "./resources/v2/routers";
 
-import indexRouter from "./routers";
-import user from "./routers/user";
-import video from "./routers/video";
+// import indexRouter from "./routers";
 
-import department from "./routers/department";
 import fileUpload from "express-fileupload";
 import apiversion from "./vendor/apiversion";
-import socket from "./socket";
-import notification from "./routers/notification";
 
 // const moduleURL = new URL(import.meta.url);
 // global.__dirname = path.dirname(moduleURL.pathname.substring(1));
@@ -44,10 +39,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 // setup folder contain assets
-// app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 //socket
-socket(app);
 
 // upload file
 app.use(
@@ -63,13 +57,7 @@ apiversion(app, {
   v2: routerV2,
 });
 
-app.use("/", indexRouter);
-app.use("/", user);
-app.use("/", notification);
 
-app.use("/department", department);
-
-// --END--      App routers
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
